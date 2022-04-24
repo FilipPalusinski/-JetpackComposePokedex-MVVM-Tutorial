@@ -62,7 +62,7 @@ fun PokemonListScreen(
                     .fillMaxWidth()
                     .padding(16.dp)
             ){
-
+ 
             }
         }
     }
@@ -178,7 +178,7 @@ fun PokedexEntry(
 
 @Composable
 fun PokedexRow(
-    rowIndex: Int
+    rowIndex: Int,
     entries: List<PokedexListEntry>,
     navController: NavController
 ) {
