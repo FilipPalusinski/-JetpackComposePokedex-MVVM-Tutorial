@@ -1,5 +1,6 @@
 package com.plcoding.jetpackcomposepokedex.repository
 
+import android.util.Log
 import com.plcoding.jetpackcomposepokedex.data.remote.PokeApi
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.Pokemon
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.PokemonList
@@ -11,20 +12,22 @@ import javax.inject.Inject
 class PokemonRepository @Inject constructor(
     private val api: PokeApi
 ) {
+
     suspend fun getPokemonList(limit: Int, offset: Int): Resource<PokemonList> {
         val response = try {
             api.getPokemonList(limit, offset)
         } catch(e: Exception) {
-            return Resource.Error("An uknown error occured")
+            return Resource.Error(message = "An unknown error occured.$e")
         }
-        return Resource.Success(response)
+
+        return Resource.Success(data = response)
     }
 
     suspend fun getPokemonInfo(pokemonName: String): Resource<Pokemon> {
         val response = try {
             api.getPokemonInfo(pokemonName)
         } catch(e: Exception) {
-            return Resource.Error("An uknown error occured")
+            return Resource.Error("An unknown error occured.")
         }
         return Resource.Success(response)
     }
